@@ -32,7 +32,11 @@ int main(int argc, char *argv[]){
     for(int i = 0; i < n; i++){
       a[i] = dist(e2);
       b[i] = dist(e2);
-      std::cout << a[i] << " " << b[i]<< "\n";
+      // std::cout << a[i] << " " << b[i]<< "\n";
+    }
+    vadd2(n,a,b,c);
+    for(int i = 0; i < n; i++){
+      std::cout << a[i] << " " << b[i]<<" " << c[i] <<"\n";
     }
 
 
