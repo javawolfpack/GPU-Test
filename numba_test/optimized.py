@@ -4,7 +4,7 @@ from numba import jit, int32, float64
 import time
 
 @jit(float64(float64, float64, int32))
-def function(a, b, n):
+def fun(a, b, n):
     result=[]
     for i in range(n):
         result+=[a[i]+b[i]]
