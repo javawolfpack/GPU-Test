@@ -6,9 +6,9 @@ import numba
 
 @numba.jit(nopython=True, parallel=True)
 def fun(a,b,n):
-    c=[]
+    out = np.empty_like(a)
     for i in range(n):
-        c+=[a[i]+b[i]]
+        c[i]=a[i]+b[i]
     return c
 
 if len(sys.argv) < 2:
