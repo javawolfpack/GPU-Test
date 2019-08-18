@@ -1,6 +1,6 @@
 import sys
 import numpy as np
-from numba import jit, int32, float64
+from numba import njit
 import time
 
 @njit
