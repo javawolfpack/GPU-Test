@@ -1,5 +1,7 @@
 import sys
 import numpy as np
+import time
+
 
 def fun(a,b,n):
     c=[]
@@ -14,5 +16,8 @@ if len(sys.argv) < 2:
 n=int(sys.argv[1])
 a=np.random.uniform(low=-100, high=100, size=(n))
 b=np.random.uniform(low=-100, high=100, size=(n))
+start = time.perf_counter()
 c=fun(a,b,n)
+end=time.perf_counter()
 print(c)
+print("Elapsed Time: " str(end - start))
