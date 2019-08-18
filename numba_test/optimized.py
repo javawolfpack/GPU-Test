@@ -6,7 +6,7 @@ import time
 @jit(nopython=True, parallel=True)
 def fun(a, b, n):
     result=[]
-    for i in prange(a.shape[0]):
+    for i in prange(n):
         # print(a[i])
         result.append(a[i]+b[i])
 
