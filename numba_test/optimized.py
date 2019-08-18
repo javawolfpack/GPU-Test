@@ -16,8 +16,8 @@ if len(sys.argv) < 2:
     quit()
 
 n=int(sys.argv[1])
-a=np.random.uniform(low=-100, high=100, size=(n))
-b=np.random.uniform(low=-100, high=100, size=(n))
+a=np.random.uniform(low=-100, high=100, size=(n), dtype=np.float32)
+b=np.random.uniform(low=-100, high=100, size=(n), dtype=np.float32)
 start = time.perf_counter()
 returnc = fun(a,b,n)
 end=time.perf_counter()
