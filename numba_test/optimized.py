@@ -15,6 +15,14 @@ def fun(a, b, n, result):
     # your loop or numerically intensive computations
     return result
 
+@cuda.jit
+def matadd(A, B, C):
+    """Perform matrix addition of C = A + B
+    """
+    i = cuda.grid(1)
+    if i < C.shape[0]:
+        C[i] = A[i]+B[i]
+
 
 if len(sys.argv) < 2:
     print("Requires 1 argument, the number of elements in the array")
@@ -25,7 +33,7 @@ a=np.random.uniform(low=-100, high=100, size=(n))
 b=np.random.uniform(low=-100, high=100, size=(n))
 start = time.perf_counter()
 result = np.zeros(n)
-c=fun(a,b,n,result)
+c=matadd(a,b, result)
 end=time.perf_counter()
 print(c)
 print("Elapsed Time: " + str(end - start))
