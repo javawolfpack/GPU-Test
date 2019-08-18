@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 
 def fun(a,b,n):
     c=[]
@@ -11,7 +12,7 @@ if len(sys.argv) < 2:
     quit()
 
 n=int(sys.argv[1])
-a=[random.uniform(-100,100) for _ in xrange(n)]
-b=[random.uniform(-100,100) for _ in xrange(n)]
+a=np.random.uniform(low=-100, high=100, size=(n))
+b=np.random.uniform(low=-100, high=100, size=(n))
 c=fun(a,b,n)
 print(c)
