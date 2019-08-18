@@ -12,4 +12,7 @@ int main(){
   if (!A[0]) {
     printf("Able to use offloading!\n");
   }
+  else{
+    printf("Not able to use offloading!\n");
+  }
 }
