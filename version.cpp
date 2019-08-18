@@ -1,3 +1,5 @@
+// Found on answer here: https://stackoverflow.com/questions/1304363/how-to-check-the-version-of-openmp-on-linux
+
 #include <unordered_map>
 #include <cstdio>
 #include <omp.h>
