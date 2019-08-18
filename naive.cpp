@@ -3,6 +3,7 @@
 #include <stdexcept>
 #include <string>
 #include <random>
+#include <iostream>
 
 
 //Basic function taken from example here: https://stackoverflow.com/questions/28962655/can-openmp-be-used-for-gpus
