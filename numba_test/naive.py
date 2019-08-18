@@ -1,3 +1,4 @@
+import sys
 
 def fun(a,b,n):
     c=[]
