@@ -5,10 +5,10 @@ import time
 
 @njit(parallel=True)
 def fun(a, b, n):
-    result=[]
+    result = np.zeros(n)
     for i in prange(n):
         # print(a[i])
-        result.append(a[i]+b[i])
+        result[i]=a[i]+b[i]
 
     # your loop or numerically intensive computations
     return result
