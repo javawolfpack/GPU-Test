@@ -1,9 +1,9 @@
 import sys
 import numpy as np
-from numba import njit
+from numba import jit
 import time
 
-@njit
+@jit(nopython=True)
 def fun(a, b, n):
     result=[]
     for i in range(n):
