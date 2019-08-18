@@ -3,7 +3,7 @@ import numpy as np
 from numba import jit, int32, float64
 import time
 
-@jit(float64(float64, float64, int32))
+@njit
 def fun(a, b, n):
     result=[]
     for i in range(n):
