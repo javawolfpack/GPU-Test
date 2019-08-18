@@ -1,12 +1,13 @@
 import sys
 import numpy as np
-from numba import jit
+from numba import jit, prange
 import time
 
 @jit(nopython=True, parallel=True)
 def fun(a, b, n):
     result=[]
-    for i in range(n):
+    for i in prange(a.shape[0]):
+        print(a[i])
         result.append(a[i]+b[i])
 
     # your loop or numerically intensive computations
