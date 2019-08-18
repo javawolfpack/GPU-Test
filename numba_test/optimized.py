@@ -1,9 +1,9 @@
 import sys
 import numpy as np
-from numba import jit, prange
+from numba import njit, prange
 import time
 
-@jit(nopython=True, parallel=True)
+@njit(parallel=True)
 def fun(a, b, n):
     result=[]
     for i in prange(n):
