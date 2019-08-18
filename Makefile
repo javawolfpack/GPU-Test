@@ -8,4 +8,4 @@ FILES = ./version
 all: $(FILES)
 
 version:
-	$(CXX) $(OMP) -o version version.c
+	$(CXX) $(OMP) -o version version.cpp
