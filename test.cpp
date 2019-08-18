@@ -1,3 +1,4 @@
+//Snippit found in answer here: https://stackoverflow.com/questions/44685568/how-do-i-use-the-gpu-available-with-openmp
 #include <cstdio>
 #include <omp.h>
 
