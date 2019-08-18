@@ -5,8 +5,7 @@ import time
 
 # @njit(parallel=True)
 @cuda.jit
-def fun(a, b, n):
-    result = np.zeros(n)
+def fun(a, b, n, result):
     # for i in prange(n):
     #     # print(a[i])
     #     result[i]=a[i]+b[i]
@@ -25,7 +24,8 @@ n=int(sys.argv[1])
 a=np.random.uniform(low=-100, high=100, size=(n))
 b=np.random.uniform(low=-100, high=100, size=(n))
 start = time.perf_counter()
-c=fun(a,b,n)
+result = np.zeros(n)
+c=fun(a,b,n,result)
 end=time.perf_counter()
 print(c)
 print("Elapsed Time: " + str(end - start))
