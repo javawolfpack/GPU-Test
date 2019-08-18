@@ -7,7 +7,7 @@ import time
 def fun(a, b, n):
     result=[]
     for i in prange(a.shape[0]):
-        print(a[i])
+        # print(a[i])
         result.append(a[i]+b[i])
 
     # your loop or numerically intensive computations
