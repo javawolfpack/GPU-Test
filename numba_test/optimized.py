@@ -6,7 +6,7 @@ import numba
 
 @numba.jit(nopython=True, parallel=True)
 def fun(a,b,n):
-    out = np.empty_like(a)
+    out = np.empty_like(a, dtype=np.float32)
     for i in range(n):
         c[i]=a[i]+b[i]
     return c
