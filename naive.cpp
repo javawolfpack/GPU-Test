@@ -35,12 +35,12 @@ int main(int argc, char *argv[]){
       // std::cout << a[i] << " " << b[i]<< "\n";
     }
     vadd2(n,a,b,c);
-    float total = 0;
-    for(int i = 0; i < n; i++){
-      total+=c[i];
-      // std::cout << a[i] << " " << b[i]<<" " << c[i] <<"\n";
-    }
-    std::cout << total << "\n";
+    // float total = 0;
+    // for(int i = 0; i < n; i++){
+    //   total+=c[i];
+    //   // std::cout << a[i] << " " << b[i]<<" " << c[i] <<"\n";
+    // }
+    // std::cout << total << "\n";
 
 
   } catch (std::invalid_argument const &ex) {
