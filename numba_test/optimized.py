@@ -6,7 +6,7 @@ import numba
 
 @numba.jit(nopython=True, parallel=True)
 def fun(a,b,n):
-    out = np.empty_like(a, dtype=np.float32)
+    out = np.empty_like(a)
     for i in range(n):
         c[i]=a[i]+b[i]
     return c
@@ -19,7 +19,7 @@ n=int(sys.argv[1])
 a=np.random.uniform(low=-100, high=100, size=(n))
 b=np.random.uniform(low=-100, high=100, size=(n))
 start = time.perf_counter()
-c=fun(a,b,n)
+returnc = fun(a,b,n)
 end=time.perf_counter()
 # print(c)
 print("Elapsed Time: " + str(end - start))
