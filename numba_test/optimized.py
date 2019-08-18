@@ -7,7 +7,7 @@ import time
 def fun(a, b, n):
     result=[]
     for i in range(n):
-        result+=[a[i]+b[i]]
+        result.append(a[i]+b[i])
 
     # your loop or numerically intensive computations
     return result
