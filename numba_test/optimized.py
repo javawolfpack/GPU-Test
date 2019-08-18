@@ -1,6 +1,7 @@
 import sys
 import numpy as np
 from numba import jit, int32, float64
+import time
 
 @jit(float64(float64, float64, int32))
 def function(a, b, n):
