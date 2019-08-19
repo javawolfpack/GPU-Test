@@ -15,6 +15,36 @@ def fun(a, b, n, result):
     # your loop or numerically intensive computations
     return result
 
+bpg = 50
+tpb = 32
+n = bpg * tpb
+
+@jit(argtypes=[float32[:,:], float32[:,:], float32[:,:]], target='gpu')
+def cu_square_matrix_mul(A, B, C):
+    sA = cuda.shared.array(shape=n, dtype=float32)
+    sB = cuda.shared.array(shape=n, dtype=float32)
+
+    i = cuda.grid(1)
+
+
+    acc = 0.
+    for i in range(n):
+        if i < n:
+            sA[i] = A[i]
+            sB[i] = B[i]
+
+        cuda.syncthreads()
+
+        if i<n
+            for j in range(n):
+                acc += sA[i] * sB[i]
+
+        cuda.syncthreads()
+
+    if i<n:
+        C[i] = acc
+
+
 @cuda.jit
 def matadd(A, B, C):
     """Perform matrix addition of C = A + B
