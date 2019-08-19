@@ -28,8 +28,8 @@ if len(sys.argv) < 2:
     quit()
 
 n=int(sys.argv[1])
-a=np.random.uniform(low=-100, high=100, size=(n,n))
-b=np.random.uniform(low=-100, high=100, size=(n,n))
+a=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
+b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
 # print(a)
 # print(b)
 start = time.perf_counter()
