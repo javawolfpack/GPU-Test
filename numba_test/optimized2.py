@@ -25,6 +25,7 @@ if len(sys.argv) < 2:
     quit()
 
 n=int(sys.argv[1])
+n=n*16 #consistency with cuda3.py implementation
 a=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
 b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
 result = np.zeros((n,n), dtype=np.float32)
