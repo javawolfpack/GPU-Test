@@ -51,13 +51,9 @@ def fast_matmul(A, B, C):
     C[x, y] = tmp
 
 
-if len(sys.argv) < 2:
-    print("Requires 1 argument, the number of elements in the array")
-    quit()
 
-n=int(sys.argv[1])
-if n%TPB != 0:
-    print("N must be a multiple of: " + str(TPB))
+
+n=32
 
 a=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
 b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
