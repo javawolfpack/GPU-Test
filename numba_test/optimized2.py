@@ -46,4 +46,4 @@ matmul[blockspergrid, threadsperblock](A_global_mem, B_global_mem, C_global_mem)
 # Copy the result back to the host
 C = C_global_mem.copy_to_host()
 
-print(C)
+# print(C)
