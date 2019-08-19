@@ -14,12 +14,12 @@ def matmul(A, B, C):
         for k in range(A.shape[1]):
             tmp += A[i, k] * B[k, j]
         C[i, j] = tmp
-        cuda.syncthreads()
 
 @cuda.jit
 def matadd(A, B, C):
     i, j = cuda.grid(2)
-    C[i][j] = A[i][j] + B[i][j]
+    if i < C.shape[0] and j < C.shape[1]:
+        C[i][j] = A[i][j] + B[i][j]
 
 
 if len(sys.argv) < 2:
@@ -32,6 +32,7 @@ b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
 start = time.perf_counter()
 result = np.zeros((n,n), dtype=np.float32)
 matadd(a,b, result)
+cuda.syncthreads()
 end=time.perf_counter()
 print(result)
 print("Elapsed Time: " + str(end - start))
