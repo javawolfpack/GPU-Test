@@ -15,6 +15,11 @@ def matmul(A, B, C):
             tmp += A[i, k] * B[k, j]
         C[i, j] = tmp
 
+@cuda.jit
+def matadd(A, B, C):
+    i, j = cuda.grid(2)
+    C[i][j] = A[i][j] + B[i][j]
+
 
 if len(sys.argv) < 2:
     print("Requires 1 argument, the number of elements in the array")
@@ -25,7 +30,7 @@ a=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
 b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
 start = time.perf_counter()
 result = np.zeros((n,n), dtype=np.float32)
-matmul(a,b, result)
+matadd(a,b, result)
 end=time.perf_counter()
 print(result)
 print("Elapsed Time: " + str(end - start))
