@@ -2,6 +2,7 @@ from __future__ import division
 from numba import cuda, float32
 import numpy
 import math
+import sys
 
 # Controls threads per block and shared memory usage.
 # The computation will be done on blocks of TPBxTPB elements.
