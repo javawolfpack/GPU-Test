@@ -2,6 +2,7 @@ import sys
 import numpy as np
 from numba import cuda
 import time
+#https://nyu-cds.github.io/python-numba/05-cuda/
 
 
 # CUDA kernel
