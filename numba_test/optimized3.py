@@ -10,6 +10,11 @@ TPB = 16
 
 @cuda.jit
 def fast_matmul(A, B, C):
+    """
+    Perform matrix multiplication of C = A * B
+    Each thread computes one element of the result matrix C
+    """
+
     # Define an array in the shared memory
     # The size and type of the arrays must be known at compile time
     sA = cuda.shared.array(shape=(TPB, TPB), dtype=float32)
@@ -19,7 +24,6 @@ def fast_matmul(A, B, C):
 
     tx = cuda.threadIdx.x
     ty = cuda.threadIdx.y
-    bpg = cuda.gridDim.x    # blocks per grid
 
     if x >= C.shape[0] and y >= C.shape[1]:
         # Quit if (x, y) is outside of valid C boundary
@@ -28,7 +32,7 @@ def fast_matmul(A, B, C):
     # Each thread computes one element in the result matrix.
     # The dot product is chunked into dot products of TPB-long vectors.
     tmp = 0.
-    for i in range(bpg):
+    for i in range(int(A.shape[1] / TPB)):
         # Preload data into shared memory
         sA[tx, ty] = A[x, ty + i * TPB]
         sB[tx, ty] = B[tx + i * TPB, y]
@@ -51,11 +55,22 @@ if len(sys.argv) < 2:
     quit()
 
 n=int(sys.argv[1])
+if n%TPB != 0:
+    print("N must be a multiple of: " + str(TPB))
+
 a=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
 b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
-start = time.perf_counter()
-result = np.zeros((n,n), dtype=np.float32)
-fast_matmul(a,b, result)
-end=time.perf_counter()
-print(result)
-print("Elapsed Time: " + str(end - start))
+A_global_mem = cuda.to_device(a)
+B_global_mem = cuda.to_device(b)
+C_global_mem = cuda.device_array((n, n))
+
+sthreadsperblock = (TPB, TPB)
+blockspergrid_x = int(math.ceil(a.shape[0] / threadsperblock[1]))
+blockspergrid_y = int(math.ceil(b.shape[1] / threadsperblock[0]))
+blockspergrid = (blockspergrid_x, blockspergrid_y)
+
+# Start the kernel
+fast_matmul[blockspergrid, threadsperblock](A_global_mem, B_global_mem, C_global_mem)
+res = C_global_mem.copy_to_host()
+
+print(res)
