@@ -20,9 +20,13 @@ def matadd(A, B, C):
     """Perform matrix addition of C = A + B
     """
     i = cuda.grid(1)
-    if i < C.shape[0]:
-        C[i] = A[i]+B[i]
+    d_A = cuda.to_device(A)
+    d_A = cuda.to_device(B)
+    d_C = cuda.to_device(C)
+    if i < d_C.shape[0]:
+        d_C[i] = d_A[i]+d_B[i]
     # return C
+    C=d_C.copy_to_host()
 
 
 if len(sys.argv) < 2:
