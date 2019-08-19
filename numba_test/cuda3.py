@@ -56,12 +56,12 @@ if len(sys.argv) < 2:
 n=int(sys.argv[1])
 
 # The data array
-A = numpy.full((TPB*n, TPB*n), 3, numpy.float) # [32 x 48] matrix containing all 3's
-B = numpy.full((TPB*n, TPB*n), 4, numpy.float) # [48 x 16] matrix containing all 4's
+A = numpy.full((TPB*n, TPB*n), 3, numpy.float) # [n*TPB x n*TPB] matrix containing all 3's
+B = numpy.full((TPB*n, TPB*n), 4, numpy.float) # [n*TPB x n*TPB] matrix containing all 4's
 
 A_global_mem = cuda.to_device(A)
 B_global_mem = cuda.to_device(B)
-C_global_mem = cuda.device_array((TPB*n, TPB*n)) # [32 x 16] matrix result
+C_global_mem = cuda.device_array((TPB*n, TPB*n)) # [n*TPB x n*TPB] matrix result
 
 # Configure the blocks
 threadsperblock = (TPB, TPB)
