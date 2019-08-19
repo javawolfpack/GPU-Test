@@ -22,6 +22,7 @@ def matadd(A, B, C):
     i = cuda.grid(1)
     if i < C.shape[0]:
         C[i] = A[i]+B[i]
+    # return C
 
 
 if len(sys.argv) < 2:
@@ -33,7 +34,7 @@ a=np.random.uniform(low=-100, high=100, size=(n))
 b=np.random.uniform(low=-100, high=100, size=(n))
 start = time.perf_counter()
 result = np.zeros(n)
-c=matadd(a,b, result)
+matadd(a,b, result)
 end=time.perf_counter()
-print(c)
+print(result)
 print("Elapsed Time: " + str(end - start))
