@@ -1,14 +1,13 @@
-import sys
-import numpy as np
-from numba import cuda
-import time
+from __future__ import division
+from numba import cuda, float32
+import numpy
 import math
-
+import sys
+import time
 
 # Controls threads per block and shared memory usage.
 # The computation will be done on blocks of TPBxTPB elements.
 TPB = 16
-n=32
 
 @cuda.jit
 def fast_matmul(A, B, C):
@@ -51,24 +50,30 @@ def fast_matmul(A, B, C):
 
     C[x, y] = tmp
 
+if len(sys.argv) < 2:
+    print("Requires 1 argument, the number of elements in the array")
+    quit()
 
+n=int(sys.argv[1])
 
+# The data array
+A = numpy.full((TPB*n, TPB*n), 3, numpy.float) # [n*TPB x n*TPB] matrix containing all 3's
+B = numpy.full((TPB*n, TPB*n), 4, numpy.float) # [n*TPB x n*TPB] matrix containing all 4's
 
+A_global_mem = cuda.to_device(A)
+B_global_mem = cuda.to_device(B)
+C_global_mem = cuda.device_array((TPB*n, TPB*n)) # [n*TPB x n*TPB] matrix result
 
-
-a=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float)
-b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float)
-A_global_mem = cuda.to_device(a)
-B_global_mem = cuda.to_device(b)
-C_global_mem = cuda.device_array((n, n))
-
+# Configure the blocks
 threadsperblock = (TPB, TPB)
-blockspergrid_x = int(math.ceil(a.shape[0] / threadsperblock[1]))
-blockspergrid_y = int(math.ceil(b.shape[1] / threadsperblock[0]))
+blockspergrid_x = int(math.ceil(A.shape[0] / threadsperblock[1]))
+blockspergrid_y = int(math.ceil(B.shape[1] / threadsperblock[0]))
 blockspergrid = (blockspergrid_x, blockspergrid_y)
 
 # Start the kernel
+start = time.perf_counter()
 fast_matmul[blockspergrid, threadsperblock](A_global_mem, B_global_mem, C_global_mem)
 res = C_global_mem.copy_to_host()
-
-print(res)
+end=time.perf_counter()
+print("Elapsed Time: " + str(end - start))
+# print(res)
