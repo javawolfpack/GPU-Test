@@ -2,6 +2,7 @@ import sys
 import numpy as np
 from numba import cuda
 import time
+import math
 
 
 # Controls threads per block and shared memory usage.
