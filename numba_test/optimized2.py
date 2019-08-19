@@ -42,9 +42,11 @@ blockspergrid_x = int(math.ceil(a.shape[0] / threadsperblock[0]))
 blockspergrid_y = int(math.ceil(b.shape[1] / threadsperblock[1]))
 blockspergrid = (blockspergrid_x, blockspergrid_y)
 # Start the kernel
-matmul[blockspergrid, threadsperblock](A_global_mem, B_global_mem, C_global_mem)
+start = time.perf_counter()
 
+matmul[blockspergrid, threadsperblock](A_global_mem, B_global_mem, C_global_mem)
 # Copy the result back to the host
 C = C_global_mem.copy_to_host()
-
+end=time.perf_counter()
+print("Elapsed Time: " + str(end - start))
 # print(C)
