@@ -2,6 +2,8 @@ import sys
 import numpy as np
 from numba import cuda
 import time
+import math
+
 #https://nyu-cds.github.io/python-numba/05-cuda/
 
 
