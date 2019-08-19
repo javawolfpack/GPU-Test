@@ -14,7 +14,7 @@ def matmul(A, B, C):
         for k in range(A.shape[1]):
             tmp += A[i, k] * B[k, j]
         C[i, j] = tmp
-    cuda.syncthreads()
+        cuda.syncthreads()
 
 @cuda.jit
 def matadd(A, B, C):
