@@ -1,10 +1,11 @@
 import sys
 import numpy as np
+from numba import jit
 import time
 import timeit
 
 
-@numba.jit(nopython=True, parallel=True)
+@jit(nopython=True, parallel=True)
 def fun(a,b,n):
     result = np.zeros((n,n), dtype=np.float32)
 
