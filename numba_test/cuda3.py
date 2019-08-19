@@ -73,4 +73,4 @@ blockspergrid = (blockspergrid_x, blockspergrid_y)
 fast_matmul[blockspergrid, threadsperblock](A_global_mem, B_global_mem, C_global_mem)
 res = C_global_mem.copy_to_host()
 
-print(res)
+# print(res)
