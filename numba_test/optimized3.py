@@ -8,6 +8,7 @@ import math
 # Controls threads per block and shared memory usage.
 # The computation will be done on blocks of TPBxTPB elements.
 TPB = 16
+n=32
 
 @cuda.jit
 def fast_matmul(A, B, C):
@@ -53,10 +54,10 @@ def fast_matmul(A, B, C):
 
 
 
-n=32
 
-a=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
-b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float32)
+
+a=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float)
+b=np.random.uniform(low=-100, high=100, size=(n,n)).astype(np.float)
 A_global_mem = cuda.to_device(a)
 B_global_mem = cuda.to_device(b)
 C_global_mem = cuda.device_array((n, n))
