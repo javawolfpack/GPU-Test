@@ -65,7 +65,7 @@ A_global_mem = cuda.to_device(a)
 B_global_mem = cuda.to_device(b)
 C_global_mem = cuda.device_array((n, n))
 
-sthreadsperblock = (TPB, TPB)
+threadsperblock = (TPB, TPB)
 blockspergrid_x = int(math.ceil(a.shape[0] / threadsperblock[1]))
 blockspergrid_y = int(math.ceil(b.shape[1] / threadsperblock[0]))
 blockspergrid = (blockspergrid_x, blockspergrid_y)
