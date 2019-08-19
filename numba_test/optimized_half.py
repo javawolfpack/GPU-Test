@@ -5,7 +5,7 @@ import time
 import timeit
 
 
-@jit(nopython=True)
+@jit(nopython=True, fastmath=False)
 def fun(a,b,n):
     result = np.zeros((n,n), dtype=np.float32)
 
