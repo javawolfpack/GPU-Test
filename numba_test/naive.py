@@ -1,6 +1,8 @@
 import sys
 import numpy as np
 import time
+import timeit
+
 
 
 def fun(a,b,n):
@@ -16,6 +18,11 @@ def fun(a,b,n):
 
     return result
 
+def wrapper(func, *args, **kwargs):
+    def wrapped():
+        return func(*args, **kwargs)
+    return wrapped
+
 if len(sys.argv) < 2:
     print("Requires 1 argument, the number of elements in the array")
     quit()
@@ -27,6 +34,8 @@ b=np.random.uniform(low=-100, high=100, size=(n,n))
 # print(b)
 start = time.perf_counter()
 c=fun(a,b,n)
+# wrapped = wrapper(fun, a,b,n)
+# print(timeit.timeit(wrapped))
 end=time.perf_counter()
-print(c)
-print("Elapsed Time: " + str(end - start))
+# print(c)
+# print("Elapsed Time: " + str(end - start))
